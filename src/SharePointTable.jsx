@@ -1,8 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 
 // ⬇️ Your Azure Function URL
-const API_URL =
-  "https://test-sp122-g0hbb0aad4cpeuba.canadacentral-01.azurewebsites.net/api/get-usecase-data";
+const API_URL = import.meta.env.BASE_URL + 'data/use_cases.json';
 
 // Columns to show in table
 const VISIBLE_COLUMNS = [
