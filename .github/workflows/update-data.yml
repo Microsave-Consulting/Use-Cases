@@ -5,6 +5,9 @@ on:
     - cron: "0 * * * *"   # ⬅️ Runs every hour
   workflow_dispatch:
 
+permissions:
+  contents: write   # ⬅️ add this
+
 jobs:
   update-json:
     runs-on: ubuntu-latest
