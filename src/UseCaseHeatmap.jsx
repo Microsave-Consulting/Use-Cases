@@ -6,7 +6,6 @@ import {
   Geography,
   Marker,
 } from "react-simple-maps";
-import { scaleLinear } from "d3-scale";
 import { geoCentroid } from "d3-geo";
 import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json";
@@ -32,13 +31,14 @@ const geoUrl =
   "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
 
 export default function UseCaseHeatmap({ items }) {
-  const [hoverInfo, setHoverInfo] = useState(null);   // {iso2, name, value}
+  const [hoverInfo, setHoverInfo] = useState(null);       // { iso2, name, value }
   const [hoverCentroid, setHoverCentroid] = useState(null); // [lon, lat]
-  const [tooltipPos, setTooltipPos] = useState(null); // cursor position
+  const [tooltipPos, setTooltipPos] = useState(null);     // { x, y }
 
-  // Aggregate use cases per ISO2
+  // 1) Aggregate use cases per ISO2
   const { countsByCode, minValue, maxValue } = useMemo(() => {
     const counts = {};
+
     items.forEach((row) => {
       const names = splitValues(row.Country || "");
       names.forEach((n) => {
@@ -72,16 +72,54 @@ export default function UseCaseHeatmap({ items }) {
     };
   }, [items]);
 
-  // Orange heat color scale
+  // 2) Discrete turquoise palette: each unique count → unique, high-contrast color
   const colorScale = useMemo(() => {
-    if (!maxValue) return () => "#102957";
-    return scaleLinear()
-      .domain([minValue, maxValue])
-      .range(["#fed7aa", "#f97316"]);
-  }, [minValue, maxValue]);
+    const values = Object.values(countsByCode);
+    if (!values.length) {
+      return () => "#0a2239"; // dark fallback
+    }
 
-  // Show tooltip + pin when hovering
+    const uniqueValues = Array.from(new Set(values)).sort((a, b) => a - b);
+
+    // Strongly distinct turquoise / aqua / teal shades
+    const palette = [
+      "#c8f7ff", // very light
+      "#94ecff", // light
+      "#5fe0ff", // bright cyan
+      "#29d4ff", // strong cyan
+      "#00bfdf", // your key aqua
+      "#009fbe", // teal-ish
+      "#007c95", // deep teal
+      "#005f70", // darkest teal
+    ];
+
+    const n = uniqueValues.length;
+    const colorMap = {};
+
+    uniqueValues.forEach((v, idx) => {
+      if (n === 1) {
+        // Only one value → central-ish color
+        colorMap[v] = palette[4];
+      } else {
+        // Spread indices across the palette range
+        const paletteIndex = Math.round(
+          (idx / (n - 1)) * (palette.length - 1)
+        );
+        colorMap[v] = palette[paletteIndex];
+      }
+    });
+
+    return (value) => colorMap[value] || "#0a2239";
+  }, [countsByCode]);
+
+  // Hover helpers
   const showHover = (info, centroid, evt) => {
+    if (!info || !centroid) {
+      setHoverInfo(null);
+      setHoverCentroid(null);
+      setTooltipPos(null);
+      return;
+    }
     setHoverInfo(info);
     setHoverCentroid(centroid);
     setTooltipPos({ x: evt.clientX, y: evt.clientY });
@@ -126,25 +164,21 @@ export default function UseCaseHeatmap({ items }) {
         </h2>
 
         <ComposableMap
-          projectionConfig={{
-            scale: 155,
-            center: [-10, 10],
-          }}
+          projectionConfig={{ scale: 155, center: [-10, 10] }}
           width={1000}
           height={450}
           style={{ width: "100%", height: "auto" }}
         >
           <Geographies geography={geoUrl}>
             {({ geographies }) => {
-              // Build one centroid per ISO2
+              // 3) Build centroids per ISO2 (one per country)
               const centroidByIso = {};
               geographies.forEach((geo) => {
                 const p = geo.properties || {};
-                const name =
-                  p.name || p.NAME || p.ADMIN || "Unknown";
+                const name = p.name || p.NAME || p.ADMIN || "Unknown";
+
                 let iso2 =
                   (p.ISO_A2 || p.iso_a2 || p.ISO2 || "").toUpperCase();
-
                 if (!iso2 && name !== "Unknown") {
                   const resolved = countries.getAlpha2Code(name, "en");
                   if (resolved) iso2 = resolved.toUpperCase();
@@ -154,8 +188,8 @@ export default function UseCaseHeatmap({ items }) {
                 const c = geoCentroid(geo);
                 if (
                   Array.isArray(c) &&
-                  !isNaN(c[0]) &&
-                  !isNaN(c[1]) &&
+                  !Number.isNaN(c[0]) &&
+                  !Number.isNaN(c[1]) &&
                   !centroidByIso[iso2]
                 ) {
                   centroidByIso[iso2] = { centroid: c, name };
@@ -164,14 +198,13 @@ export default function UseCaseHeatmap({ items }) {
 
               return (
                 <>
-                  {/* Draw countries */}
+                  {/* 4) Countries with discrete turquoise colors */}
                   {geographies.map((geo) => {
                     const p = geo.properties || {};
-                    const name =
-                      p.name || p.NAME || p.ADMIN || "Unknown";
+                    const name = p.name || p.NAME || p.ADMIN || "Unknown";
+
                     let iso2 =
                       (p.ISO_A2 || p.iso_a2 || p.ISO2 || "").toUpperCase();
-
                     if (!iso2 && name !== "Unknown") {
                       const resolved = countries.getAlpha2Code(name, "en");
                       if (resolved) iso2 = resolved.toUpperCase();
@@ -189,9 +222,7 @@ export default function UseCaseHeatmap({ items }) {
                       <Geography
                         key={geo.rsmKey}
                         geography={geo}
-                        fill={
-                          hasData ? colorScale(val) : "#102957"
-                        }
+                        fill={hasData ? colorScale(val) : "#0a2239"}
                         stroke="#1f3b73"
                         strokeWidth={0.4}
                         style={{
@@ -206,7 +237,7 @@ export default function UseCaseHeatmap({ items }) {
                           info &&
                           showHover(
                             info,
-                            centroidByIso[iso2]?.centroid,
+                            centroidByIso[info.iso2]?.centroid,
                             e
                           )
                         }
@@ -214,7 +245,7 @@ export default function UseCaseHeatmap({ items }) {
                           info &&
                           showHover(
                             info,
-                            centroidByIso[iso2]?.centroid,
+                            centroidByIso[info.iso2]?.centroid,
                             e
                           )
                         }
@@ -223,47 +254,38 @@ export default function UseCaseHeatmap({ items }) {
                     );
                   })}
 
-                  {/* Draw PIN ONLY WHEN HOVERING */}
+                  {/* 5) Hover-only flag pin */}
                   {hoverInfo && hoverCentroid && (
                     <Marker coordinates={hoverCentroid}>
-                      <g transform={`translate(0, -30)`}>
+                      <g transform="translate(0, -30)">
                         {/* Pin stem */}
                         <line
                           x1="0"
-                          y1={11}
+                          y1="11"
                           x2="0"
-                          y2={30 - 4}
+                          y2="26"
                           stroke="#facc15"
                           strokeWidth="2"
                         />
-
                         {/* Pin tip */}
                         <polygon
-                          points={`-4,${30 - 4} 4,${30 - 4} 0,${
-                            30 - 4 + 6
-                          }`}
+                          points="-4,26 4,26 0,32"
                           fill="#facc15"
                         />
-
                         {/* Glow */}
                         <circle
-                          r={15}
-                          fill="rgba(250,204,21,0.2)"
+                          r="15"
+                          fill="rgba(250,204,21,0.25)"
                         />
-
                         {/* White circle */}
-                        <circle
-                          r={12}
-                          fill="#ffffff"
-                        />
+                        <circle r="12" fill="#ffffff" />
 
-                        {/* Flag inside circle */}
+                        {/* Circular flag */}
                         <defs>
                           <clipPath id="flag-clip-hover">
-                            <circle r={11} cx={0} cy={0} />
+                            <circle r="11" cx="0" cy="0" />
                           </clipPath>
                         </defs>
-
                         <image
                           href={flagUrlFromIso2(hoverInfo.iso2)}
                           x={-11}
@@ -274,9 +296,9 @@ export default function UseCaseHeatmap({ items }) {
                           style={{ pointerEvents: "none" }}
                         />
 
-                        {/* Number label under pin head */}
+                        {/* Number under pin head */}
                         <text
-                          y={28}
+                          y="28"
                           textAnchor="middle"
                           style={{
                             fill: "#facc15",
@@ -295,14 +317,14 @@ export default function UseCaseHeatmap({ items }) {
           </Geographies>
         </ComposableMap>
 
-        {/* Floating Tooltip */}
+        {/* 6) Tooltip following the cursor */}
         {hoverInfo && tooltipPos && (
           <div
             style={{
               position: "fixed",
               left: tooltipPos.x + 12,
               top: tooltipPos.y + 12,
-              background: "rgba(15,23,42,0.92)",
+              background: "rgba(10,18,28,0.92)",
               color: "#e5e7eb",
               padding: "6px 10px",
               borderRadius: "6px",
@@ -318,6 +340,18 @@ export default function UseCaseHeatmap({ items }) {
           </div>
         )}
 
+        {/* Optional min/max info */}
+        <div
+          style={{
+            marginTop: "0.75rem",
+            fontSize: "0.8rem",
+            color: "#cbd5f5",
+            textAlign: "right",
+            opacity: 0.85,
+          }}
+        >
+          Min: {minValue || 0} • Max: {maxValue || 0}
+        </div>
       </div>
     </div>
   );
