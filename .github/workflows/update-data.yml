@@ -63,8 +63,11 @@ jobs:
       id-token: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout latest main
         uses: actions/checkout@v4
+        with:
+          ref: main          # ⬅️ IMPORTANT: use the tip of main, which includes the new commit
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
