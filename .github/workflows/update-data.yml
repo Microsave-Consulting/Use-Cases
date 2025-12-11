@@ -52,7 +52,6 @@ jobs:
 
   build-and-deploy:
     needs: update-json
-    if: needs.update-json.outputs.json_changed == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
