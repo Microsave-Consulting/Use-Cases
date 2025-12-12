@@ -36,7 +36,7 @@ jobs:
 
       - name: Export cover images and build final JSON
         run: |
-          node scripts/export_images_and_json.js
+          node scripts/export_images_and_json.cjs
         env:
           AZURE_FUNC_URL_IMAGE: ${{ secrets.AZURE_FUNC_URL_IMAGE }}
           AZURE_FUNC_KEY: ${{ secrets.AZURE_FUNC_KEY }}
