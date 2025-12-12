@@ -19,17 +19,19 @@
     "AssuranceLevels": "Authentication Assurance Level 2, Identity Assurance Level 2",
     "FundedBy": null,
     "Remarks": "Employment management platform using digital ID to verify diplomas, reduce fraud, and facilitate job matching with AI-driven recommendations",
-    "Image": null,
+    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[e6be2a9c6c8d42cabfef807e5e7cf117][1]_[5].jpg\",\"originalImageName\":\"resize\"}",
     "ID": 96,
-    "Modified": "2025-12-12T05:56:50Z",
+    "Modified": "2025-12-12T07:41:25Z",
     "Created": "2025-12-11T09:54:27Z",
     "AuthorId": 12,
     "EditorId": 12,
-    "OData__UIVersionString": "5.0",
-    "Attachments": false,
+    "OData__UIVersionString": "7.0",
+    "Attachments": true,
     "GUID": "fb1ac186-a255-4fdf-9f0d-1b36617269e4",
-    "Images": [],
-    "CoverImage": null
+    "Images": [
+      "/images/use-cases/96/cover.jpg"
+    ],
+    "CoverImage": "/images/use-cases/96/cover.jpg"
   },
   {
     "FileSystemObjectType": 0,
@@ -115,17 +117,19 @@
     "AssuranceLevels": "Authentication Assurance Level 2, Identity Assurance Level 2",
     "FundedBy": null,
     "Remarks": "Digital platform for farmer identification enabling access to subsidies, loans, and market linkages; includes farm monitoring dashboard",
-    "Image": null,
+    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[5cac540e3a2e4a188f2a3aab497c52cb][1]_[1].png\",\"originalImageName\":\"AgriID\"}",
     "ID": 90,
-    "Modified": "2025-12-11T09:29:17Z",
+    "Modified": "2025-12-12T07:41:15Z",
     "Created": "2025-12-11T09:29:17Z",
     "AuthorId": 12,
     "EditorId": 12,
-    "OData__UIVersionString": "1.0",
-    "Attachments": false,
+    "OData__UIVersionString": "3.0",
+    "Attachments": true,
     "GUID": "2a5c78e1-59a5-4a51-bfa5-3999ee3e1c91",
-    "Images": [],
-    "CoverImage": null
+    "Images": [
+      "/images/use-cases/90/cover.png"
+    ],
+    "CoverImage": "/images/use-cases/90/cover.png"
   },
   {
     "FileSystemObjectType": 0,
@@ -147,19 +151,17 @@
     "AssuranceLevels": "Authentication Assurance Level 3, Identity Assurance Level 3",
     "FundedBy": null,
     "Remarks": "Secure electronic voting with dual verification (CNI + fingerprint), blockchain vote storage, solar-powered tablets for rural accessibility.",
-    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[c811df466f534cf6b165c2f174777501][1]_[1].png\",\"originalImageName\":\"AgriID\"}",
+    "Image": null,
     "ID": 89,
-    "Modified": "2025-12-12T06:34:49Z",
+    "Modified": "2025-12-12T07:41:08Z",
     "Created": "2025-12-11T09:29:16Z",
     "AuthorId": 12,
     "EditorId": 12,
-    "OData__UIVersionString": "3.0",
-    "Attachments": true,
+    "OData__UIVersionString": "5.0",
+    "Attachments": false,
     "GUID": "37c3802a-fc40-482f-a48a-f5aebc6e7988",
-    "Images": [
-      "/images/use-cases/89/cover.png"
-    ],
-    "CoverImage": "/images/use-cases/89/cover.png"
+    "Images": [],
+    "CoverImage": null
   },
   {
     "FileSystemObjectType": 0,
