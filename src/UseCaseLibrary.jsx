@@ -1,6 +1,6 @@
 // src/UseCaseLibrary.jsx
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import populationData from "country-json/src/country-by-population.json";
 import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json";
@@ -171,11 +171,9 @@ function FilterBubble({ id, label, options, selectedValues, onChange, primary })
    Card component
    ======================= */
 
-function UseCaseCard({ uc }) {
+function UseCaseCard({ uc, onOpen }) {
   const sectors = splitValues(uc.Sectors);
-  const accessibility = splitValues(uc.Accessibility);
   const authModalities = splitValues(uc.AuthModalities);
-  const assurance = splitValues(uc.AssuranceLevels);
 
   const primarySector = sectors[0] || "—";
 
@@ -208,8 +206,26 @@ function UseCaseCard({ uc }) {
   // Keep card image dimensions constant
   const IMAGE_HEIGHT = 150;
 
+  const handleOpen = () => {
+    if (typeof onOpen === "function") onOpen(uc);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleOpen();
+    }
+  };
+
   return (
-    <div className="ucl-card">
+    <div
+      className="ucl-card ucl-card-clickable"
+      role="button"
+      tabIndex={0}
+      onClick={handleOpen}
+      onKeyDown={handleKeyDown}
+      aria-label={`Open details for ${uc.Title || "use case"}`}
+    >
       {/* Image area (always present) */}
       <div
         className="ucl-card-image"
@@ -259,7 +275,7 @@ function UseCaseCard({ uc }) {
       )}
 
       {authModalities.length > 0 && (
-        <div className="ucl-card-tags">
+        <div className="ucl-card-tags" onClick={(e) => e.stopPropagation()}>
           {authModalities.map((tag) => (
             <span key={`auth-${tag}`} className="ucl-tag-pill">
               {tag}
@@ -276,6 +292,7 @@ function UseCaseCard({ uc }) {
    ======================= */
 
 export default function UseCaseLibrary() {
+  const navigate = useNavigate();
   const [rawItems, setRawItems] = useState([]);
   const [filterConfig, setFilterConfig] = useState([]);
   const [filters, setFilters] = useState({});
@@ -413,6 +430,13 @@ export default function UseCaseLibrary() {
     setSearch("");
   };
 
+  // ✅ Navigate to detail page
+  const openUseCase = (uc) => {
+    const caseId = uc?.ID ?? uc?.Id;
+    if (!caseId) return;
+    navigate(`/use-cases/${caseId}`);
+  };
+
   // Apply search + filters
   const filtered = useMemo(() => {
     if (!filterConfig.length) return useCases;
@@ -532,7 +556,11 @@ export default function UseCaseLibrary() {
       ) : (
         <section className="ucl-cards-grid">
           {filtered.map((uc, idx) => (
-            <UseCaseCard key={uc.ID ?? uc.Id ?? idx} uc={uc} />
+            <UseCaseCard
+              key={uc.ID ?? uc.Id ?? idx}
+              uc={uc}
+              onOpen={openUseCase}
+            />
           ))}
         </section>
       )}

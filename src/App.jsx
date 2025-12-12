@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import MapPage from "./MapPage";
 import UseCaseLibrary from "./UseCaseLibrary";
+import UseCaseDetail from "./UseCaseDetail";   // ✅ ADD THIS
 import "./App.css";
 
 const basename = import.meta.env.BASE_URL; // Vite + GH Pages safe
@@ -33,6 +34,9 @@ function App() {
 
           {/* Use Case Library */}
           <Route path="/library" element={<UseCaseLibrary />} />
+
+          {/* ✅ Use Case Detail page */}
+          <Route path="/use-cases/:id" element={<UseCaseDetail />} />
         </Routes>
       </div>
     </BrowserRouter>

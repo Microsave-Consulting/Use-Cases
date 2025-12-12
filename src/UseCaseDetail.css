@@ -1,0 +1,200 @@
+.ucd-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.ucd-page-center {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.ucd-breadcrumb {
+  font-size: 0.92rem;
+  color: #666;
+  margin: 0.75rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ucd-breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+}
+.ucd-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.ucd-crumb-sep {
+  color: #999;
+}
+
+.ucd-crumb-current {
+  color: #222;
+  font-weight: 600;
+}
+
+.ucd-hero {
+  margin-bottom: 1.25rem;
+}
+
+.ucd-hero-card {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f3f5f8;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.ucd-hero-media {
+  position: relative;
+  height: 280px;
+}
+
+.ucd-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ucd-hero-fallback {
+  background: linear-gradient(135deg, #e9eef8, #f7f7fb);
+}
+
+.ucd-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.28) 45%,
+    rgba(0, 0, 0, 0.05) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.ucd-hero-title {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  margin: 0;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 700;
+  max-width: 860px;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.ucd-meta {
+  margin-top: 0.9rem;
+  background: #eef3ff;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+}
+
+.ucd-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.ucd-meta-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  min-width: 220px;
+}
+
+.ucd-meta-label {
+  font-weight: 700;
+  color: #111;
+  font-size: 0.92rem;
+}
+
+.ucd-meta-value {
+  color: #222;
+  font-size: 0.92rem;
+}
+
+.ucd-meta-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.ucd-body {
+  padding: 0.5rem 0.25rem;
+}
+
+.ucd-section {
+  margin-top: 1.25rem;
+}
+
+.ucd-h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.ucd-description p {
+  margin: 0 0 0.85rem;
+  color: #222;
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+.ucd-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.ucd-pill {
+  border: 1px dashed rgba(0, 0, 0, 0.35);
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.95rem;
+  color: #111;
+  background: #fff;
+}
+
+.ucd-muted {
+  color: #666;
+  margin: 0.25rem 0 0;
+}
+
+.ucd-btn {
+  display: inline-block;
+  padding: 0.6rem 0.85rem;
+  border-radius: 10px;
+  text-decoration: none;
+  background: #1e3a8a;
+  color: #fff;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .ucd-hero-media {
+    height: 240px;
+  }
+  .ucd-hero-title {
+    font-size: 1.55rem;
+  }
+  .ucd-meta-item {
+    min-width: 100%;
+  }
+  .ucd-meta-divider {
+    display: none;
+  }
+}
