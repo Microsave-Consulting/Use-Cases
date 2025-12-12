@@ -31,7 +31,7 @@ jobs:
 
       - name: Export cover images and build final JSON
         run: |
-          node - <<'NODE'
+          cat > export_images_and_json.js << "NODE"
           const fs = require("fs");
           const path = require("path");
           const { execFileSync } = require("child_process");
@@ -55,7 +55,6 @@ jobs:
             const id = it.ID ?? it.Id ?? it.id;
             if (!id) continue;
 
-            // Only attempt image export if SharePoint indicates attachments exist
             if (!it.Attachments) {
               it.Images = [];
               it.CoverImage = null;
@@ -66,8 +65,6 @@ jobs:
             const folder = path.join(imagesRoot, String(id));
             fs.mkdirSync(folder, { recursive: true });
 
-            // We will store as cover.jpg (your endpoint currently returns cover.<ext>.
-            // Since you validated cover.jpg, we'll standardize to cover.jpg.)
             const outFile = path.join(folder, "cover.jpg");
 
             const url =
@@ -84,7 +81,6 @@ jobs:
 
               downloaded++;
             } catch (e) {
-              // Remove partial file and mark no image
               try { if (fs.existsSync(outFile)) fs.unlinkSync(outFile); } catch {}
               it.Images = [];
               it.CoverImage = null;
@@ -97,6 +93,9 @@ jobs:
           console.log(`Wrote ${outJsonPath} (${items.length} items)`);
           console.log(`Images: downloaded=${downloaded}, skipped(no attachments)=${skipped}, failed=${failed}`);
           NODE
+
+          node export_images_and_json.js
+          rm -f export_images_and_json.js
         env:
           AZURE_FUNC_URL_IMAGE: ${{ secrets.AZURE_FUNC_URL_IMAGE }}
           AZURE_FUNC_KEY: ${{ secrets.AZURE_FUNC_KEY }}
