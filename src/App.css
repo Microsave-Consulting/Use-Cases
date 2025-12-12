@@ -1,9 +1,13 @@
 /* === General page wrapper for the library === */
 
 .ucl-page {
-  max-width: 1200px;
+  /* ✅ slightly narrower content area so 3 cards look less wide */
+  max-width: 950px;
   margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
+
+  /* ✅ slightly larger left/right margins (via padding) */
+  padding: 1.5rem 2.25rem 3rem;
+
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
 }
@@ -340,7 +344,10 @@
 
 .ucl-cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(260px, 1fr));
+
+  /* ✅ keep 3 per row, but reduce min width so each card is narrower */
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+
   gap: 0.9rem;
 }
 

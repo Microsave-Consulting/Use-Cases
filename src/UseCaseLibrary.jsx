@@ -131,7 +131,8 @@ function FilterBubble({ id, label, options, selectedValues, onChange, primary })
         type="button"
         className={
           "ucl-filter-bubble " +
-          (primary ? "ucl-filter-bubble-primary" : "ucl-filter-bubble-secondary")
+          (primary ? "ucl-filter-bubble-primary " : "ucl-filter-bubble-secondary ") +
+          (hasSelection ? "ucl-filter-bubble-selected" : "")
         }
         onClick={() => setOpen((o) => !o)}
       >
@@ -150,7 +151,9 @@ function FilterBubble({ id, label, options, selectedValues, onChange, primary })
             return (
               <div
                 key={value}
-                className={"ucl-filter-option " + (active ? "ucl-filter-option-active" : "")}
+                className={
+                  "ucl-filter-option " + (active ? "ucl-filter-option-active" : "")
+                }
                 onClick={() => toggleValue(value)}
               >
                 <span className="ucl-filter-checkbox">{active ? "✓" : ""}</span>
@@ -196,8 +199,7 @@ function UseCaseCard({ uc }) {
     : null;
 
   // ✅ Cover image (blank space if missing)
-  const coverRel =
-    uc.CoverImage || (Array.isArray(uc.Images) ? uc.Images[0] : null);
+  const coverRel = uc.CoverImage || (Array.isArray(uc.Images) ? uc.Images[0] : null);
 
   const coverSrc = coverRel
     ? import.meta.env.BASE_URL + String(coverRel).replace(/^\//, "")
@@ -256,16 +258,15 @@ function UseCaseCard({ uc }) {
         </div>
       )}
 
-{authModalities.length > 0 && (
-  <div className="ucl-card-tags">
-    {authModalities.map((tag) => (
-      <span key={`auth-${tag}`} className="ucl-tag-pill">
-        {tag}
-      </span>
-    ))}
-  </div>
-)}
-
+      {authModalities.length > 0 && (
+        <div className="ucl-card-tags">
+          {authModalities.map((tag) => (
+            <span key={`auth-${tag}`} className="ucl-tag-pill">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
