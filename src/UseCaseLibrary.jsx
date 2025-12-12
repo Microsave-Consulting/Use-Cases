@@ -89,14 +89,7 @@ function normalizeCountryLabelForMatch(label) {
    Filter pill + dropdown
    ======================= */
 
-function FilterBubble({
-  id,
-  label,
-  options,
-  selectedValues,
-  onChange,
-  primary,
-}) {
+function FilterBubble({ id, label, options, selectedValues, onChange, primary }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -119,9 +112,7 @@ function FilterBubble({
     if (selectedValues.length === 2) {
       return `${selectedValues[0]}, ${selectedValues[1]}`;
     }
-    return `${selectedValues[0]}, ${selectedValues[1]} +${
-      selectedValues.length - 2
-    }`;
+    return `${selectedValues[0]}, ${selectedValues[1]} +${selectedValues.length - 2}`;
   }, [selectedValues, hasSelection]);
 
   const toggleValue = (value) => {
@@ -159,15 +150,10 @@ function FilterBubble({
             return (
               <div
                 key={value}
-                className={
-                  "ucl-filter-option " +
-                  (active ? "ucl-filter-option-active" : "")
-                }
+                className={"ucl-filter-option " + (active ? "ucl-filter-option-active" : "")}
                 onClick={() => toggleValue(value)}
               >
-                <span className="ucl-filter-checkbox">
-                  {active ? "✓" : ""}
-                </span>
+                <span className="ucl-filter-checkbox">{active ? "✓" : ""}</span>
                 <span className="ucl-filter-option-label">{value}</span>
               </div>
             );
@@ -209,8 +195,45 @@ function UseCaseCard({ uc }) {
     ? `Population (approx): ${formatPopulation(population)}`
     : null;
 
+  // ✅ Cover image (blank space if missing)
+  const coverRel =
+    uc.CoverImage || (Array.isArray(uc.Images) ? uc.Images[0] : null);
+
+  const coverSrc = coverRel
+    ? import.meta.env.BASE_URL + String(coverRel).replace(/^\//, "")
+    : null;
+
+  // Keep card image dimensions constant
+  const IMAGE_HEIGHT = 150;
+
   return (
     <div className="ucl-card">
+      {/* Image area (always present) */}
+      <div
+        className="ucl-card-image"
+        style={{
+          height: IMAGE_HEIGHT,
+          borderRadius: 14,
+          overflow: "hidden",
+          background: "#fff",
+          marginBottom: "0.75rem",
+        }}
+      >
+        {coverSrc ? (
+          <img
+            src={coverSrc}
+            alt={uc.Title ? `${uc.Title} cover` : "Use case cover"}
+            loading="lazy"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          />
+        ) : null}
+      </div>
+
       <div className="ucl-card-header">
         <div className="ucl-card-title">{uc.Title || "Untitled use case"}</div>
 
@@ -224,16 +247,12 @@ function UseCaseCard({ uc }) {
 
         <div className="ucl-card-meta-sub">Region: {regionText}</div>
 
-        {populationText && (
-          <div className="ucl-card-meta-sub">{populationText}</div>
-        )}
+        {populationText && <div className="ucl-card-meta-sub">{populationText}</div>}
       </div>
 
       {description && (
         <div className="ucl-card-body">
-          {description.length > 260
-            ? description.slice(0, 260) + "…"
-            : description}
+          {description.length > 260 ? description.slice(0, 260) + "…" : description}
         </div>
       )}
 
@@ -359,20 +378,14 @@ export default function UseCaseLibrary() {
     if (!filterConfig.length) return;
 
     const countryParam = searchParams.get("country");
-    if (!countryParam) {
-      // No country in URL – do not force anything
-      return;
-    }
+    if (!countryParam) return;
 
     // Find the Country filter config
     const countryFilter = filterConfig.find((f) => f.field === "Country");
     if (!countryFilter) return;
 
     const optionsForCountry = filterOptions[countryFilter.id] || [];
-    if (!optionsForCountry.length) {
-      // Options not ready yet – wait for filterOptions to populate
-      return;
-    }
+    if (!optionsForCountry.length) return;
 
     const targetNorm = normalizeCountryLabelForMatch(countryParam);
 
@@ -383,16 +396,10 @@ export default function UseCaseLibrary() {
 
     if (!match) return;
 
-    // Only update state if the selection is actually changing
     setFilters((prev) => {
       const current = prev[countryFilter.id] || [];
-      if (current.length === 1 && current[0] === match) {
-        return prev; // no change, avoid extra re-renders
-      }
-      return {
-        ...prev,
-        [countryFilter.id]: [match],
-      };
+      if (current.length === 1 && current[0] === match) return prev;
+      return { ...prev, [countryFilter.id]: [match] };
     });
   }, [filterConfig, filterOptions, searchParams]);
 
@@ -419,20 +426,12 @@ export default function UseCaseLibrary() {
     return useCases.filter((uc) => {
       // text search
       if (search.trim()) {
-        const haystack = [
-          uc.Title,
-          uc.Country,
-          uc.Sectors,
-          uc.KeyTerms,
-          uc.Remarks,
-        ]
+        const haystack = [uc.Title, uc.Country, uc.Sectors, uc.KeyTerms, uc.Remarks]
           .filter(Boolean)
           .join(" ")
           .toLowerCase();
 
-        if (!haystack.includes(search.toLowerCase())) {
-          return false;
-        }
+        if (!haystack.includes(search.toLowerCase())) return false;
       }
 
       // filters: AND across filters, OR within each
@@ -499,11 +498,7 @@ export default function UseCaseLibrary() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <button
-              type="button"
-              className="ucl-search-submit"
-              aria-label="Search"
-            >
+            <button type="button" className="ucl-search-submit" aria-label="Search">
               ➜
             </button>
           </div>
@@ -519,14 +514,10 @@ export default function UseCaseLibrary() {
                 options={filterOptions[f.id] || []}
                 selectedValues={filters[f.id] || []}
                 onChange={(vals) => updateFilter(f.id, vals)}
-                primary={index < 3} // first three as primary style
+                primary={index < 3}
               />
             ))}
-            <button
-              type="button"
-              className="ucl-clear-filters"
-              onClick={clearAll}
-            >
+            <button type="button" className="ucl-clear-filters" onClick={clearAll}>
               Clear all
             </button>
           </div>
