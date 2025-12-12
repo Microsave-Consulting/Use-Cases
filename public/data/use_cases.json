@@ -147,17 +147,19 @@
     "AssuranceLevels": "Authentication Assurance Level 3, Identity Assurance Level 3",
     "FundedBy": null,
     "Remarks": "Secure electronic voting with dual verification (CNI + fingerprint), blockchain vote storage, solar-powered tablets for rural accessibility.",
-    "Image": null,
+    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[c811df466f534cf6b165c2f174777501][1]_[1].png\",\"originalImageName\":\"AgriID\"}",
     "ID": 89,
-    "Modified": "2025-12-11T09:29:16Z",
+    "Modified": "2025-12-12T06:34:49Z",
     "Created": "2025-12-11T09:29:16Z",
     "AuthorId": 12,
     "EditorId": 12,
-    "OData__UIVersionString": "1.0",
-    "Attachments": false,
+    "OData__UIVersionString": "3.0",
+    "Attachments": true,
     "GUID": "37c3802a-fc40-482f-a48a-f5aebc6e7988",
-    "Images": [],
-    "CoverImage": null
+    "Images": [
+      "/images/use-cases/89/cover.jpg"
+    ],
+    "CoverImage": "/images/use-cases/89/cover.jpg"
   },
   {
     "FileSystemObjectType": 0,
@@ -659,17 +661,19 @@
     "AssuranceLevels": "Authentication Assurance Level 1, Identity Assurance Level 2",
     "FundedBy": "ID authority, Government MDAs",
     "Remarks": "INJI Certify will be used to create a Verifiable Credentials (VC) or Digital ID for the farmer. Enables cross-border, trusted transactions through identity-based trust and product traceability.",
-    "Image": null,
+    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[4b2096edd2dd4d38b06b07450ffac4aa][1]_[1].png\",\"originalImageName\":\"F2Global\"}",
     "ID": 73,
-    "Modified": "2025-12-11T09:28:47Z",
+    "Modified": "2025-12-12T06:35:23Z",
     "Created": "2025-12-11T09:28:47Z",
     "AuthorId": 12,
     "EditorId": 12,
-    "OData__UIVersionString": "1.0",
-    "Attachments": false,
+    "OData__UIVersionString": "3.0",
+    "Attachments": true,
     "GUID": "007a291b-7163-4e9e-bfa0-717f0d1ce44d",
-    "Images": [],
-    "CoverImage": null
+    "Images": [
+      "/images/use-cases/73/cover.jpg"
+    ],
+    "CoverImage": "/images/use-cases/73/cover.jpg"
   },
   {
     "FileSystemObjectType": 0,
