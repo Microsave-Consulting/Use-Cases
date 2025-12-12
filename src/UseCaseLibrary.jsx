@@ -252,27 +252,20 @@ function UseCaseCard({ uc }) {
 
       {description && (
         <div className="ucl-card-body">
-          {description.length > 260 ? description.slice(0, 260) + "…" : description}
+          {description.length > 80 ? description.slice(0, 80) + "…" : description}
         </div>
       )}
 
-      <div className="ucl-card-tags">
-        {accessibility.map((tag) => (
-          <span key={`acc-${tag}`} className="ucl-tag-pill">
-            {tag}
-          </span>
-        ))}
-        {authModalities.map((tag) => (
-          <span key={`auth-${tag}`} className="ucl-tag-pill">
-            {tag}
-          </span>
-        ))}
-        {assurance.map((tag) => (
-          <span key={`ass-${tag}`} className="ucl-tag-pill">
-            {tag}
-          </span>
-        ))}
-      </div>
+{authModalities.length > 0 && (
+  <div className="ucl-card-tags">
+    {authModalities.map((tag) => (
+      <span key={`auth-${tag}`} className="ucl-tag-pill">
+        {tag}
+      </span>
+    ))}
+  </div>
+)}
+
     </div>
   );
 }
