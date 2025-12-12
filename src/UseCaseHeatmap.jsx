@@ -169,7 +169,7 @@ export default function UseCaseHeatmap({ items }) {
             fontSize: "1.6rem",
           }}
         >
-          Use-case Heatmap
+          Digital ID Innovations Library
         </h2>
 
         <ComposableMap
