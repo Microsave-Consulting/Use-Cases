@@ -115,13 +115,13 @@
     "AssuranceLevels": "Authentication Assurance Level 2, Identity Assurance Level 2",
     "FundedBy": null,
     "Remarks": "Digital platform for farmer identification enabling access to subsidies, loans, and market linkages; includes farm monitoring dashboard",
-    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[5cac540e3a2e4a188f2a3aab497c52cb][1]_[1].png\",\"originalImageName\":\"AgriID\"}",
+    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[9d3bd8a9c3a2470189c6f592c487a9b2][1]_[5].png\",\"originalImageName\":\"AgriID\"}",
     "ID": 90,
-    "Modified": "2025-12-12T07:41:15Z",
+    "Modified": "2025-12-15T03:50:05Z",
     "Created": "2025-12-11T09:29:17Z",
     "AuthorId": 12,
     "EditorId": 12,
-    "OData__UIVersionString": "3.0",
+    "OData__UIVersionString": "7.0",
     "Attachments": true,
     "GUID": "2a5c78e1-59a5-4a51-bfa5-3999ee3e1c91",
     "Images": [
@@ -565,17 +565,19 @@
     "AssuranceLevels": "Authentication Assurance Level 2",
     "FundedBy": null,
     "Remarks": null,
-    "Image": null,
+    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[7fd6ec1135b24039bafddb90f070830b][1]_[1].png\",\"originalImageName\":\"WeCare\"}",
     "ID": 76,
-    "Modified": "2025-12-11T09:28:52Z",
+    "Modified": "2025-12-15T03:49:05Z",
     "Created": "2025-12-11T09:28:52Z",
     "AuthorId": 12,
     "EditorId": 12,
-    "OData__UIVersionString": "1.0",
-    "Attachments": false,
+    "OData__UIVersionString": "3.0",
+    "Attachments": true,
     "GUID": "854480b2-418d-4eba-987d-aba6dae52224",
-    "Images": [],
-    "CoverImage": null
+    "Images": [
+      "/images/use-cases/76/cover.png"
+    ],
+    "CoverImage": "/images/use-cases/76/cover.png"
   },
   {
     "FileSystemObjectType": 0,
