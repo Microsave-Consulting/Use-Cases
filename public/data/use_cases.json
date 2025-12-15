@@ -661,13 +661,13 @@
     "AssuranceLevels": "Authentication Assurance Level 1, Identity Assurance Level 2",
     "FundedBy": "ID authority, Government MDAs",
     "Remarks": "INJI Certify will be used to create a Verifiable Credentials (VC) or Digital ID for the farmer. Enables cross-border, trusted transactions through identity-based trust and product traceability.",
-    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[4b2096edd2dd4d38b06b07450ffac4aa][1]_[1].png\",\"originalImageName\":\"F2Global\"}",
+    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[0ff48c9cd6554fa2aa2edb6b9d96d2d5][1]_[5].png\",\"originalImageName\":\"Farm2Global\"}",
     "ID": 73,
-    "Modified": "2025-12-12T06:35:23Z",
+    "Modified": "2025-12-15T03:35:27Z",
     "Created": "2025-12-11T09:28:47Z",
     "AuthorId": 12,
     "EditorId": 12,
-    "OData__UIVersionString": "3.0",
+    "OData__UIVersionString": "7.0",
     "Attachments": true,
     "GUID": "007a291b-7163-4e9e-bfa0-717f0d1ce44d",
     "Images": [
@@ -855,16 +855,18 @@
     "AssuranceLevels": "Identity Assurance Level 2, Authentication Assurance Level 1",
     "FundedBy": null,
     "Remarks": "Manual tracking and outdated contacts cause missed student loan repayments. BoSDID detects graduate employment by linking digital ID and tax number to trigger repayment workflows, sustaining and recycling Botswana's student fund.",
-    "Image": null,
+    "Image": "{\"fileName\":\"Reserved_ImageAttachment_[5]_[Image][32]_[ccda5643932d421ab254d51429655285][1]_[1].png\",\"originalImageName\":\"Student loans\"}",
     "ID": 67,
-    "Modified": "2025-12-11T09:28:36Z",
+    "Modified": "2025-12-15T03:34:48Z",
     "Created": "2025-12-11T09:28:36Z",
     "AuthorId": 12,
     "EditorId": 12,
-    "OData__UIVersionString": "1.0",
-    "Attachments": false,
+    "OData__UIVersionString": "3.0",
+    "Attachments": true,
     "GUID": "3852b01f-1bd0-4115-8bf7-f1aa8ed72264",
-    "Images": [],
-    "CoverImage": null
+    "Images": [
+      "/images/use-cases/67/cover.png"
+    ],
+    "CoverImage": "/images/use-cases/67/cover.png"
   }
 ]
