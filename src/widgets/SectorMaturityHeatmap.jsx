@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Split "A, B, C" → ["A", "B", "C"]
 function splitValues(value) {
@@ -20,7 +21,6 @@ function colorFor(value, max) {
   if (!max || value <= 0) return "#f7f7f7"; // near-white for zeros
   const t = value / max; // 0..1
   // Interpolate between light and dark
-  // (handpicked to resemble your screenshot)
   const light = { r: 230, g: 242, b: 255 };
   const dark = { r: 23, g: 58, b: 140 };
 
@@ -37,6 +37,8 @@ export default function SectorMaturityHeatmap({
   // Optional: force column order if you want exactly these two
   maturityOrder = ["Conceptual/Research", "Pilot/Testing", "Production/Scale", "Unknown"],
 }) {
+  const navigate = useNavigate();
+
   const { sectors, maturities, matrix, maxValue } = useMemo(() => {
     const sectorSet = new Set();
     const maturitySet = new Set();
@@ -46,10 +48,11 @@ export default function SectorMaturityHeatmap({
 
     (items || []).forEach((uc) => {
       const maturity = normalizeMaturity(uc.MaturityLevel);
-      if (!uc.MaturityLevel)
-        return;
-      const sectorsList = splitValues(uc.Sectors);
 
+      // If maturity is missing, ignore this record (your original behavior)
+      if (!uc.MaturityLevel) return;
+
+      const sectorsList = splitValues(uc.Sectors);
       if (!sectorsList.length) return;
 
       maturitySet.add(maturity);
@@ -82,7 +85,12 @@ export default function SectorMaturityHeatmap({
       return { sector: sec, values };
     });
 
-    return { sectors: sectorList, maturities: maturityList, matrix: mat, maxValue: max };
+    return {
+      sectors: sectorList,
+      maturities: maturityList,
+      matrix: mat,
+      maxValue: max,
+    };
   }, [items, maturityOrder]);
 
   // Layout sizing
@@ -93,9 +101,20 @@ export default function SectorMaturityHeatmap({
   const colorbarW = 18;
   const gap = 10;
 
-  const width =
-    leftLabelW + maturities.length * cellW + gap + colorbarW + 30;
+  const width = leftLabelW + maturities.length * cellW + gap + colorbarW + 30;
   const height = topLabelH + sectors.length * cellH + 30;
+
+  function goToFilteredLibrary(sector, maturity) {
+    if (!sector || !maturity) return;
+
+    // Optional: don't navigate on 0 cells
+    // (you can remove this if you want 0 to also navigate)
+    const params = new URLSearchParams();
+    params.set("sector", sector);
+    params.set("maturity", maturity);
+
+    navigate(`/library?${params.toString()}`);
+  }
 
   return (
     <div style={{ width: "100%", overflowX: "auto" }}>
@@ -159,12 +178,40 @@ export default function SectorMaturityHeatmap({
 
                 {/* Cells */}
                 {row.values.map((val, j) => {
+                  const maturity = maturities[j];
                   const x = leftLabelW + j * cellW;
                   const fill = colorFor(val, maxValue);
                   const textColor = val > maxValue * 0.55 ? "#ffffff" : "#111827";
 
+                  const clickable = val > 0; // only make >0 clickable (change if you want)
+
                   return (
-                    <g key={`${row.sector}-${j}`}>
+                    <g
+                      key={`${row.sector}-${maturity}`}
+                      role={clickable ? "button" : undefined}
+                      tabIndex={clickable ? 0 : undefined}
+                      aria-label={
+                        clickable
+                          ? `Filter use cases: Sector ${row.sector}, Maturity ${maturity}`
+                          : undefined
+                      }
+                      onClick={
+                        clickable
+                          ? () => goToFilteredLibrary(row.sector, maturity)
+                          : undefined
+                      }
+                      onKeyDown={
+                        clickable
+                          ? (e) => {
+                              if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                goToFilteredLibrary(row.sector, maturity);
+                              }
+                            }
+                          : undefined
+                      }
+                      style={{ cursor: clickable ? "pointer" : "default" }}
+                    >
                       <rect
                         x={x}
                         y={y}
@@ -180,6 +227,7 @@ export default function SectorMaturityHeatmap({
                         fontSize="12"
                         fill={textColor}
                         fontWeight={600}
+                        style={{ pointerEvents: "none" }} // ensure clicks go to the <g>
                       >
                         {val}
                       </text>
@@ -191,8 +239,9 @@ export default function SectorMaturityHeatmap({
           })}
 
           {/* Colorbar */}
-          <g transform={`translate(${leftLabelW + maturities.length * cellW + gap}, ${topLabelH})`}>
-            {/* Gradient defs */}
+          <g
+            transform={`translate(${leftLabelW + maturities.length * cellW + gap}, ${topLabelH})`}
+          >
             <defs>
               <linearGradient id="heatbar" x1="0" y1="1" x2="0" y2="0">
                 <stop offset="0%" stopColor={colorFor(0, maxValue)} />
@@ -209,7 +258,6 @@ export default function SectorMaturityHeatmap({
               stroke="#e5e7eb"
             />
 
-            {/* ticks */}
             <text x={colorbarW + 8} y={12} fontSize="12" fill="#111827">
               {maxValue}
             </text>

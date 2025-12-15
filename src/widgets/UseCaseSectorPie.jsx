@@ -1,5 +1,13 @@
 import { useMemo } from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { useNavigate } from "react-router-dom";
 
 // Split "A, B, C" → ["A", "B", "C"]
 function splitValues(value) {
@@ -47,24 +55,20 @@ function makeDualLabelRenderer({ showLeaderLine = false, minPercentForLabels = 0
   return function renderDualLabel(props) {
     const { cx, cy, midAngle, outerRadius, percent, name } = props;
 
-    // Hide labels for tiny slices
     if (typeof percent !== "number" || percent < minPercentForLabels) return null;
 
     const RADIAN = Math.PI / 180;
 
-    // Inside position (percentage)
     const rInside = outerRadius * 0.6;
     const xInside = cx + rInside * Math.cos(-midAngle * RADIAN);
     const yInside = cy + rInside * Math.sin(-midAngle * RADIAN);
 
-    // Outside position (sector name)
     const rOutside = outerRadius * 1.05;
     const xOutside = cx + rOutside * Math.cos(-midAngle * RADIAN);
     const yOutside = cy + rOutside * Math.sin(-midAngle * RADIAN);
 
     const textAnchor = xOutside > cx ? "start" : "end";
 
-    // Optional leader line points
     const rLineStart = outerRadius * 1.02;
     const xLineStart = cx + rLineStart * Math.cos(-midAngle * RADIAN);
     const yLineStart = cy + rLineStart * Math.sin(-midAngle * RADIAN);
@@ -82,7 +86,6 @@ function makeDualLabelRenderer({ showLeaderLine = false, minPercentForLabels = 0
           />
         ) : null}
 
-        {/* Percentage inside slice */}
         <text
           x={xInside}
           y={yInside}
@@ -95,7 +98,6 @@ function makeDualLabelRenderer({ showLeaderLine = false, minPercentForLabels = 0
           {(percent * 100).toFixed(1)}%
         </text>
 
-        {/* Sector name outside */}
         <text
           x={xOutside}
           y={yOutside}
@@ -126,18 +128,6 @@ const COLORS = [
   "#f2b6cf",
 ];
 
-/**
- * Reusable Pie widget
- *
- * Props:
- *  - items: array of use-case objects (must include `Sectors`)
- *  - title?: string
- *  - topN?: number (default 10; set 0 or null to disable "Other" grouping)
- *  - height?: number (default 520)
- *  - showLegend?: boolean (default false; labels are already on-chart)
- *  - showLeaderLine?: boolean (default false)
- *  - minPercentForLabels?: number (default 0.04 = 4%)
- */
 export default function UseCaseSectorPie({
   items,
   title = "Distribution of Use Cases by Sector",
@@ -147,6 +137,8 @@ export default function UseCaseSectorPie({
   showLeaderLine = false,
   minPercentForLabels = 0.04,
 }) {
+  const navigate = useNavigate();
+
   const data = useMemo(() => buildSectorDistribution(items, topN), [items, topN]);
   const total = useMemo(() => data.reduce((s, r) => s + r.value, 0), [data]);
 
@@ -154,6 +146,26 @@ export default function UseCaseSectorPie({
     () => makeDualLabelRenderer({ showLeaderLine, minPercentForLabels }),
     [showLeaderLine, minPercentForLabels]
   );
+
+  function handleSliceClick(slice) {
+    const sector = slice?.name;
+    if (!sector) return;
+
+    // Optional: ignore "Other" clicks
+    if (sector === "Other") return;
+
+    // ✅ IMPORTANT: set the query param key to whatever your Library reads.
+    // Common patterns:
+    //  - /library?sector=Education
+    //  - /library?Sectors=Education
+    //  - /library?Sectors=Education%2CHealth
+    //
+    // I’m using "Sectors" here because your data field is uc.Sectors.
+    const params = new URLSearchParams();
+    params.set("Sectors", sector);
+
+    navigate(`/library?${params.toString()}`);
+  }
 
   return (
     <div style={{ width: "100%" }}>
@@ -178,9 +190,15 @@ export default function UseCaseSectorPie({
               outerRadius={Math.min(190, Math.max(120, height * 0.35))}
               labelLine={false}
               label={renderDualLabel}
+              onClick={handleSliceClick}
+              style={{ cursor: "pointer" }}
             >
-              {data.map((_, idx) => (
-                <Cell key={idx} fill={COLORS[idx % COLORS.length]} />
+              {data.map((entry, idx) => (
+                <Cell
+                  key={entry.name || idx}
+                  fill={COLORS[idx % COLORS.length]}
+                  style={{ cursor: entry?.name === "Other" ? "default" : "pointer" }}
+                />
               ))}
             </Pie>
 

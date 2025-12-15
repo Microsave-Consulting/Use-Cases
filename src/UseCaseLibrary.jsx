@@ -85,6 +85,15 @@ function normalizeCountryLabelForMatch(label) {
   return s;
 }
 
+// Generic normalizer (used for sector/maturity URL matching)
+function normalizeLabelForMatch(label) {
+  if (!label) return "";
+  let s = String(label).trim().toLowerCase();
+  s = s.replace(/[^a-z0-9\s]/g, " ");
+  s = s.replace(/\s+/g, " ").trim();
+  return s;
+}
+
 /* =======================
    Filter pill + dropdown
    ======================= */
@@ -391,8 +400,7 @@ export default function UseCaseLibrary() {
     const countryParam = searchParams.get("country");
     if (!countryParam) return;
 
-    // Find the Country filter config
-    const countryFilter = filterConfig.find((f) => f.field === "Country");
+    const countryFilter = filterConfig.find((f) => f.id === "country");
     if (!countryFilter) return;
 
     const optionsForCountry = filterOptions[countryFilter.id] || [];
@@ -411,6 +419,72 @@ export default function UseCaseLibrary() {
       const current = prev[countryFilter.id] || [];
       if (current.length === 1 && current[0] === match) return prev;
       return { ...prev, [countryFilter.id]: [match] };
+    });
+  }, [filterConfig, filterOptions, searchParams]);
+
+  // 🔑 Apply / re-apply sector filter whenever ?sector=<name>[,<name2>...] changes
+  useEffect(() => {
+    if (!filterConfig.length) return;
+
+    const sectorParam = searchParams.get("sector");
+    if (!sectorParam) return;
+
+    const sectorFilter = filterConfig.find((f) => f.id === "sector");
+    if (!sectorFilter) return;
+
+    const optionsForSector = filterOptions[sectorFilter.id] || [];
+    if (!optionsForSector.length) return;
+
+    const wanted = splitValues(sectorParam);
+
+    const matches = wanted
+      .map((w) => {
+        const wNorm = normalizeLabelForMatch(w);
+        return (
+          optionsForSector.find((opt) => normalizeLabelForMatch(opt) === wNorm) ||
+          null
+        );
+      })
+      .filter(Boolean);
+
+    if (matches.length === 0) return;
+
+    setFilters((prev) => {
+      const current = prev[sectorFilter.id] || [];
+      const same =
+        current.length === matches.length && current.every((v) => matches.includes(v));
+
+      if (same) return prev;
+
+      return { ...prev, [sectorFilter.id]: matches };
+    });
+  }, [filterConfig, filterOptions, searchParams]);
+
+  // 🔑 Apply / re-apply maturity filter whenever ?maturity=<value> changes
+  useEffect(() => {
+    if (!filterConfig.length) return;
+
+    const maturityParam = searchParams.get("maturity");
+    if (!maturityParam) return;
+
+    const maturityFilter = filterConfig.find((f) => f.id === "maturity");
+    if (!maturityFilter) return;
+
+    const optionsForMaturity = filterOptions[maturityFilter.id] || [];
+    if (!optionsForMaturity.length) return;
+
+    const targetNorm = normalizeLabelForMatch(maturityParam);
+
+    const match =
+      optionsForMaturity.find((opt) => normalizeLabelForMatch(opt) === targetNorm) ||
+      null;
+
+    if (!match) return;
+
+    setFilters((prev) => {
+      const current = prev[maturityFilter.id] || [];
+      if (current.length === 1 && current[0] === match) return prev;
+      return { ...prev, [maturityFilter.id]: [match] };
     });
   }, [filterConfig, filterOptions, searchParams]);
 
@@ -556,11 +630,7 @@ export default function UseCaseLibrary() {
       ) : (
         <section className="ucl-cards-grid">
           {filtered.map((uc, idx) => (
-            <UseCaseCard
-              key={uc.ID ?? uc.Id ?? idx}
-              uc={uc}
-              onOpen={openUseCase}
-            />
+            <UseCaseCard key={uc.ID ?? uc.Id ?? idx} uc={uc} onOpen={openUseCase} />
           ))}
         </section>
       )}
