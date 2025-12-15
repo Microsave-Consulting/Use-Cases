@@ -52,7 +52,7 @@ export default function UseCaseHeatmap({ items }) {
     items.forEach((row) => {
       const names = splitValues(row.Country || "");
       names.forEach((n) => {
-        let nameFromData = n.trim();
+        const nameFromData = n.trim();
         if (!nameFromData) return;
 
         // Try to resolve ISO2 using the data label
@@ -78,26 +78,24 @@ export default function UseCaseHeatmap({ items }) {
     };
   }, [items]);
 
-  // 2) Discrete turquoise palette: each unique count → unique, high-contrast color
+  // 2) Discrete yellow palette: each unique count → unique, high-contrast color
   const colorScale = useMemo(() => {
     const values = Object.values(countsByCode);
     if (!values.length) {
-      // fallback when there is absolutely no data
       return () => "#2a4d7a"; // lighter blue
     }
 
     const uniqueValues = Array.from(new Set(values)).sort((a, b) => a - b);
 
-    // Strongly distinct turquoise / aqua / teal shades
     const palette = [
-      "#c8f7ff", // very light
-      "#94ecff", // light
-      "#5fe0ff", // bright cyan
-      "#29d4ff", // strong cyan
-      "#00bfdf", // your key aqua
-      "#009fbe", // teal-ish
-      "#007c95", // deep teal
-      "#005f70", // darkest teal
+      "#fff7cc", // very light
+      "#ffef99",
+      "#ffe066",
+      "#ffd033",
+      "#facc15", // strong amber
+      "#eab308",
+      "#ca8a04",
+      "#a16207", // darkest amber
     ];
 
     const n = uniqueValues.length;
@@ -105,10 +103,8 @@ export default function UseCaseHeatmap({ items }) {
 
     uniqueValues.forEach((v, idx) => {
       if (n === 1) {
-        // Only one value → central-ish color
         colorMap[v] = palette[4];
       } else {
-        // Spread indices across the palette range
         const paletteIndex = Math.round(
           (idx / (n - 1)) * (palette.length - 1)
         );
@@ -116,7 +112,7 @@ export default function UseCaseHeatmap({ items }) {
       }
     });
 
-    return (value) => colorMap[value] || "#2a4d7a"; // lighter fallback
+    return (value) => colorMap[value] || "#2a4d7a";
   }, [countsByCode]);
 
   // Hover helpers
@@ -143,7 +139,7 @@ export default function UseCaseHeatmap({ items }) {
       style={{
         width: "100%",
         padding: "2rem 0",
-        // lighter ocean-ish outer background
+        // ✅ keep the overall page/background dark (so you don’t get the cyan “band”)
         background: "#0f2447",
         position: "relative",
       }}
@@ -153,7 +149,6 @@ export default function UseCaseHeatmap({ items }) {
           width: "95vw",
           maxWidth: "1600px",
           margin: "0 auto",
-          // lighter inner card background
           background: "#122b55",
           borderRadius: "12px",
           padding: "1.5rem 1rem",
@@ -172,179 +167,183 @@ export default function UseCaseHeatmap({ items }) {
           Digital ID Innovations Library
         </h2>
 
-        <ComposableMap
-          projectionConfig={{ scale: 155, center: [-10, 10] }}
-          width={1000}
-          height={450}
-          style={{ width: "100%", height: "auto" }}
+        {/* ✅ NEW: frame around the map so cyan doesn’t fill the whole “card section” */}
+        <div
+          style={{
+            background: "#122b55",
+            padding: "0.9rem",
+            borderRadius: "12px",
+          }}
         >
-          <Geographies geography={geoUrl}>
-            {({ geographies }) => {
-              // 3) Build centroids per ISO2 (one per country)
-              const centroidByIso = {};
-              geographies.forEach((geo) => {
-                const p = geo.properties || {};
-                const geoName = p.name || p.NAME || p.ADMIN || "Unknown";
+          <ComposableMap
+            projectionConfig={{ scale: 155, center: [-10, 10] }}
+            width={1000}
+            height={450}
+            style={{
+              width: "100%",
+              height: "auto",
+              // ✅ ocean color applied to the map canvas
+              background: "#ccf7ff",
+              borderRadius: "10px",
+              overflow: "hidden",
+              display: "block",
+            }}
+          >
+            <Geographies geography={geoUrl}>
+              {({ geographies }) => {
+                // 3) Build centroids per ISO2 (one per country)
+                const centroidByIso = {};
+                geographies.forEach((geo) => {
+                  const p = geo.properties || {};
+                  const geoName = p.name || p.NAME || p.ADMIN || "Unknown";
 
-                let iso2 =
-                  (p.ISO_A2 || p.iso_a2 || p.ISO2 || "").toUpperCase();
-                if (!iso2 && geoName !== "Unknown") {
-                  const resolved = countries.getAlpha2Code(geoName, "en");
-                  if (resolved) iso2 = resolved.toUpperCase();
-                }
-                if (!iso2) return;
+                  let iso2 =
+                    (p.ISO_A2 || p.iso_a2 || p.ISO2 || "").toUpperCase();
+                  if (!iso2 && geoName !== "Unknown") {
+                    const resolved = countries.getAlpha2Code(geoName, "en");
+                    if (resolved) iso2 = resolved.toUpperCase();
+                  }
+                  if (!iso2) return;
 
-                const c = geoCentroid(geo);
-                if (
-                  Array.isArray(c) &&
-                  !Number.isNaN(c[0]) &&
-                  !Number.isNaN(c[1]) &&
-                  !centroidByIso[iso2]
-                ) {
-                  centroidByIso[iso2] = { centroid: c, geoName };
-                }
-              });
+                  const c = geoCentroid(geo);
+                  if (
+                    Array.isArray(c) &&
+                    !Number.isNaN(c[0]) &&
+                    !Number.isNaN(c[1]) &&
+                    !centroidByIso[iso2]
+                  ) {
+                    centroidByIso[iso2] = { centroid: c, geoName };
+                  }
+                });
 
-              return (
-                <>
-                  {/* 4) Countries with discrete turquoise colors */}
-                  {geographies.map((geo) => {
-                    const p = geo.properties || {};
-                    const geoName = p.name || p.NAME || p.ADMIN || "Unknown";
+                return (
+                  <>
+                    {geographies.map((geo) => {
+                      const p = geo.properties || {};
+                      const geoName = p.name || p.NAME || p.ADMIN || "Unknown";
 
-                    let iso2 =
-                      (p.ISO_A2 || p.iso_a2 || p.ISO2 || "").toUpperCase();
-                    if (!iso2 && geoName !== "Unknown") {
-                      const resolved = countries.getAlpha2Code(geoName, "en");
-                      if (resolved) iso2 = resolved.toUpperCase();
-                    }
+                      let iso2 =
+                        (p.ISO_A2 || p.iso_a2 || p.ISO2 || "").toUpperCase();
+                      if (!iso2 && geoName !== "Unknown") {
+                        const resolved = countries.getAlpha2Code(geoName, "en");
+                        if (resolved) iso2 = resolved.toUpperCase();
+                      }
 
-                    const val = iso2 ? countsByCode[iso2] || 0 : 0;
-                    const hasData = val > 0;
+                      const val = iso2 ? countsByCode[iso2] || 0 : 0;
+                      const hasData = val > 0;
 
-                    if (!hasData) {
+                      if (!hasData) {
+                        return (
+                          <Geography
+                            key={geo.rsmKey}
+                            geography={geo}
+                            fill="#2a4d7a"
+                            stroke="#1f3b73"
+                            strokeWidth={0.4}
+                            style={{
+                              default: { outline: "none" },
+                              hover: {
+                                outline: "none",
+                                cursor: "default",
+                              },
+                            }}
+                            onMouseLeave={hideHover}
+                          />
+                        );
+                      }
+
+                      const centroidInfo = centroidByIso[iso2] || {};
+                      const labelFromData = labelByIso[iso2];
+                      const displayLabel = labelFromData || geoName;
+
+                      const info = {
+                        iso2,
+                        label: displayLabel,
+                        value: val,
+                      };
+
                       return (
                         <Geography
                           key={geo.rsmKey}
                           geography={geo}
-                          fill="#2a4d7a"
+                          fill={colorScale(val)}
                           stroke="#1f3b73"
                           strokeWidth={0.4}
                           style={{
                             default: { outline: "none" },
                             hover: {
                               outline: "none",
-                              cursor: "default",
+                              cursor: "pointer",
+                              opacity: 0.9,
                             },
                           }}
+                          onMouseEnter={(e) =>
+                            showHover(info, centroidInfo.centroid, e)
+                          }
+                          onMouseMove={(e) =>
+                            showHover(info, centroidInfo.centroid, e)
+                          }
                           onMouseLeave={hideHover}
+                          onClick={() => goToCountry(info)}
                         />
                       );
-                    }
+                    })}
 
-                    const centroidInfo = centroidByIso[iso2] || {};
-                    const labelFromData = labelByIso[iso2];
-                    const displayLabel = labelFromData || geoName;
-
-                    const info = {
-                      iso2,
-                      label: displayLabel,
-                      value: val,
-                    };
-
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill={colorScale(val)}
-                        stroke="#1f3b73"
-                        strokeWidth={0.4}
-                        style={{
-                          default: { outline: "none" },
-                          hover: {
-                            outline: "none",
-                            cursor: "pointer",
-                            opacity: 0.9,
-                          },
-                        }}
-                        onMouseEnter={(e) =>
-                          showHover(info, centroidInfo.centroid, e)
-                        }
-                        onMouseMove={(e) =>
-                          showHover(info, centroidInfo.centroid, e)
-                        }
-                        onMouseLeave={hideHover}
-                        onClick={() => goToCountry(info)}
-                      />
-                    );
-                  })}
-
-                  {/* 5) Hover-only flag pin (also clickable) */}
-                  {hoverInfo && hoverCentroid && (
-                    <Marker coordinates={hoverCentroid}>
-                      <g
-                        transform="translate(0, -30)"
-                        onClick={() => goToCountry(hoverInfo)}
-                        style={{ cursor: "pointer" }}
-                      >
-                        {/* Pin stem */}
-                        <line
-                          x1="0"
-                          y1="11"
-                          x2="0"
-                          y2="26"
-                          stroke="#facc15"
-                          strokeWidth="2"
-                        />
-                        {/* Pin tip */}
-                        <polygon
-                          points="-4,26 4,26 0,32"
-                          fill="#facc15"
-                        />
-                        {/* Glow */}
-                        <circle
-                          r="15"
-                          fill="rgba(250,204,21,0.25)"
-                        />
-                        {/* White circle */}
-                        <circle r="12" fill="#ffffff" />
-
-                        {/* Circular flag */}
-                        <defs>
-                          <clipPath id="flag-clip-hover">
-                            <circle r="11" cx="0" cy="0" />
-                          </clipPath>
-                        </defs>
-                        <image
-                          href={flagUrlFromIso2(hoverInfo.iso2)}
-                          x={-11}
-                          y={-11}
-                          width={22}
-                          height={22}
-                          clipPath="url(#flag-clip-hover)"
-                          style={{ pointerEvents: "none" }}
-                        />
-
-                        {/* Number under pin head */}
-                        <text
-                          y="28"
-                          textAnchor="middle"
-                          style={{
-                            fill: "#facc15",
-                            fontSize: "0.75rem",
-                            fontWeight: "bold",
-                          }}
+                    {/* 5) Hover-only flag pin (also clickable) */}
+                    {hoverInfo && hoverCentroid && (
+                      <Marker coordinates={hoverCentroid}>
+                        <g
+                          transform="translate(0, -30)"
+                          onClick={() => goToCountry(hoverInfo)}
+                          style={{ cursor: "pointer" }}
                         >
-                          {hoverInfo.value}
-                        </text>
-                      </g>
-                    </Marker>
-                  )}
-                </>
-              );
-            }}
-          </Geographies>
-        </ComposableMap>
+                          <line
+                            x1="0"
+                            y1="11"
+                            x2="0"
+                            y2="26"
+                            stroke="#facc15"
+                            strokeWidth="2"
+                          />
+                          <polygon points="-4,26 4,26 0,32" fill="#facc15" />
+                          <circle r="15" fill="rgba(250,204,21,0.25)" />
+                          <circle r="12" fill="#ffffff" />
+
+                          <defs>
+                            <clipPath id="flag-clip-hover">
+                              <circle r="11" cx="0" cy="0" />
+                            </clipPath>
+                          </defs>
+                          <image
+                            href={flagUrlFromIso2(hoverInfo.iso2)}
+                            x={-11}
+                            y={-11}
+                            width={22}
+                            height={22}
+                            clipPath="url(#flag-clip-hover)"
+                            style={{ pointerEvents: "none" }}
+                          />
+
+                          <text
+                            y="28"
+                            textAnchor="middle"
+                            style={{
+                              fill: "#facc15",
+                              fontSize: "0.75rem",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {hoverInfo.value}
+                          </text>
+                        </g>
+                      </Marker>
+                    )}
+                  </>
+                );
+              }}
+            </Geographies>
+          </ComposableMap>
+        </div>
 
         {/* 6) Tooltip following the cursor */}
         {hoverInfo && tooltipPos && (
@@ -369,7 +368,6 @@ export default function UseCaseHeatmap({ items }) {
           </div>
         )}
 
-        {/* Optional min/max info */}
         <div
           style={{
             marginTop: "0.75rem",
