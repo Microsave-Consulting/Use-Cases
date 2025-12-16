@@ -20,7 +20,7 @@
     "FundedBy": null,
     "Remarks": "Papua New Guinea faces significant safety and accountability challenges in the public motor vehicle (PMV) sector, with many buses operating without proper licensing or in dangerous mechanical conditions, creating risks for passengers and owners. Road crashes remain a major cause of death in PNG, with recent PMV incidents involving brake failures and multiple fatalities. Additionally, vehicle theft, misuse, and poor service plague PMV owners due to lack of monitoring capability. This use case introduces a fully digital PMV system that verifies driver identities, provides real-time bus tracking, and enables passenger safety verification through SevisPass integration. Drivers authenticate using verified SevisPass digital IDs, preventing unlicensed and unsafe operators from operating vehicles. Vehicle profiles are digitally linked to ownership records and maintenance history, creating transparency and accountability. Real-time GPS tracking allows owners to monitor bus location and behavior, reducing theft and misuse. Passengers can confirm driver identity before boarding and use SMS emergency alert functionality to report safety concerns. The system includes community-based driver rating mechanisms and SMS emergency notifications integrated with SevisPass. Unlike manual, uncoordinated approaches, this comprehensive digital ecosystem provides transparency, prevents illegal operation, reduces vehicle misuse, and dramatically improves safety outcomes",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 99,
     "Modified": "2025-12-15T08:59:19Z",
     "Created": "2025-12-15T07:14:09Z",
@@ -33,6 +33,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -56,7 +57,7 @@
     "FundedBy": null,
     "Remarks": "Papua New Guinea is designated by the World Health Organization as a High Burden Country for tuberculosis, with children representing approximately 26% of reported TB cases—the highest proportion globally. The primary challenge is treatment non-adherence due to social issues, stigma, and lack of support, resulting in \"lost-to-follow-up\" patients who continue spreading TB in communities. This use case leverages SevisPass and SevisWallet to improve TB treatment completion rates and transparent incentive delivery. When a child visits a clinic with a parent/guardian, SevisPass enables instant identification and linking to health records. TB test results are sent through the patient's digital ID, determining treatment initiation. Treatment adherence is monitored through daily clinic check-ins, with missed doses triggering healthcare worker outreach and contact tracing. SevisPass geodata features flag high-risk transmission zones, activating identification of close contacts who receive SMS alerts for TB testing. Crucially, conditional incentives for successful treatment completion are linked to parents' or guardians' bank accounts through SevisPass/SevisWallet integration, verified through carer credentials with financial institutions. This transparent, traceable system increases treatment completion rates by approximately 15% while reducing stigma and discrimination through verified, automated processes.",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 98,
     "Modified": "2025-12-15T08:58:46Z",
     "Created": "2025-12-15T07:14:09Z",
@@ -69,6 +70,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -92,7 +94,7 @@
     "FundedBy": null,
     "Remarks": "Papua New Guinea's healthcare system currently relies on fragmented paper-based patient records that are easily lost, damaged, or inaccessible when urgently needed. This significantly impacts rural communities who often travel long distances for care. SevisHealth solves this by creating a unified national health information platform that uses SevisPass Digital ID as the secure entry point for patient registration and verification. Clinics can instantly confirm patient identity using verified national data rather than manual forms or duplicates. Each person is linked to one accurate digital health profile accessible across participating hospitals and clinics. The system operates on Oracle's Autonomous Database with secure APIs for reliability and data protection, enabling clinical staff to retrieve records in seconds. Rural clinics can work offline and sync automatically when reconnected. To ensure inclusive access, SMS reminders and USSD service enable patients without smartphones to check appointments, vaccination schedules, and clinic details via basic mobile phones. By integrating SevisPass digital identity, secure data-sharing, offline-ready tools, and multi-channel access, SevisHealth improves medical record-keeping, accelerates clinical decisions, and strengthens healthcare access across PNG.",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 97,
     "Modified": "2025-12-15T07:15:40Z",
     "Created": "2025-12-15T07:11:09Z",
@@ -105,6 +107,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -128,7 +131,7 @@
     "FundedBy": null,
     "Remarks": "Employment management platform using digital ID to verify diplomas, reduce fraud, and facilitate job matching with AI-driven recommendations",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 96,
     "Modified": "2025-12-12T08:30:38Z",
     "Created": "2025-12-11T09:54:27Z",
@@ -141,6 +144,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -164,7 +168,7 @@
     "FundedBy": null,
     "Remarks": "Digital platform connecting farmers to refrigerated solar warehouses and online marketplace to reduce post-harvest losses",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 95,
     "Modified": "2025-12-11T09:54:25Z",
     "Created": "2025-12-11T09:54:25Z",
@@ -177,6 +181,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -200,7 +205,7 @@
     "FundedBy": null,
     "Remarks": "AI-powered platform for smallholder farmers providing personalized agricultural advice, disease detection, weather forecasts, and access to credit",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 94,
     "Modified": "2025-12-11T09:54:23Z",
     "Created": "2025-12-11T09:54:23Z",
@@ -213,6 +218,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -236,7 +242,7 @@
     "FundedBy": null,
     "Remarks": "West African farmers (70% of the population) face systematic fraud with 40% of agricultural subsidies diverted by intermediaries, land conflicts affecting 60% of rural disputes, 80% financial exclusion, and limited product traceability. AgriID leverages biometric digital identity to address these challenges. Farmers scan fingerprints via mobile kiosks or USSD to directly receive subsidies, eliminating corrupt intermediaries. Biometric-linked blockchain land titles reduce disputes. Biometric credit scores based on harvest traceability enable microloans for unbanked farmers. Each harvest receives a digital \"product passport\" linked to farmer ID, enabling market access via QR codes. USSD and offline synchronization support remote farmers. This multi-use biometric approach integrates subsidy security, land rights formalization, financial inclusion, and supply chain transparency in one comprehensive system.",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 90,
     "Modified": "2025-12-15T09:07:58Z",
     "Created": "2025-12-11T09:29:17Z",
@@ -249,6 +255,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -272,7 +279,7 @@
     "FundedBy": null,
     "Remarks": "Secure electronic voting with dual verification (CNI + fingerprint), blockchain vote storage, solar-powered tablets for rural accessibility.",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 89,
     "Modified": "2025-12-12T07:41:08Z",
     "Created": "2025-12-11T09:29:16Z",
@@ -285,6 +292,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -308,7 +316,7 @@
     "FundedBy": null,
     "Remarks": "Digital platform for young entrepreneurs with AI-driven mentorship, blockchain transactions, microloans, crowdfunding, and skills development.",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 88,
     "Modified": "2025-12-11T09:29:14Z",
     "Created": "2025-12-11T09:29:14Z",
@@ -321,6 +329,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -344,7 +353,7 @@
     "FundedBy": "World Bank",
     "Remarks": "Integrates digital ID with NINEA tax system, uses blockchain and AI for fraud detection, cross-agency data sharing for compliance monitoring.",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 87,
     "Modified": "2025-12-11T09:29:13Z",
     "Created": "2025-12-11T09:29:13Z",
@@ -357,6 +366,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -380,7 +390,7 @@
     "FundedBy": "Government MDAs, Private Organisations",
     "Remarks": "Features include agricultural marketplace with personalized online stores, resource hub with agricultural news and training materials, AI chatbot integration for real-time assistance, mobile-first design with local language support, and government/financial service integration",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 86,
     "Modified": "2025-12-11T09:29:11Z",
     "Created": "2025-12-11T09:29:11Z",
@@ -393,6 +403,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -416,7 +427,7 @@
     "FundedBy": null,
     "Remarks": "Features include secure authentication through MOSIP verification, document selection and form completion, OCR processing for data extraction and validation, authority validation with real-time or deferred processing, secure PDF generation with steganography certification, and 24/7 AI chatbot support.",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 85,
     "Modified": "2025-12-11T09:29:09Z",
     "Created": "2025-12-11T09:29:09Z",
@@ -429,6 +440,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -452,7 +464,7 @@
     "FundedBy": "Government MDAs",
     "Remarks": "EduSenegal ID is a digital identity platform connecting students, schools, and employers to bridge the gap between education and employment. Features include centralized academic records input by schools, student profile empowerment with skills and certifications, employer job posting, and verified profile access",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 84,
     "Modified": "2025-12-11T09:29:07Z",
     "Created": "2025-12-11T09:29:07Z",
@@ -465,6 +477,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -488,7 +501,7 @@
     "FundedBy": "Government MDAs",
     "Remarks": "Digital driver's license leveraging MOSIP to provide secure, efficient, and transparent licensing system. Features include online application, renewal, and license management capabilities, integration with MOSIP's identity management",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 83,
     "Modified": "2025-12-11T09:29:05Z",
     "Created": "2025-12-11T09:29:05Z",
@@ -501,6 +514,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -524,7 +538,7 @@
     "FundedBy": null,
     "Remarks": null,
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 82,
     "Modified": "2025-12-11T09:29:03Z",
     "Created": "2025-12-11T09:29:03Z",
@@ -537,6 +551,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -560,7 +575,7 @@
     "FundedBy": "Government MDAs",
     "Remarks": "SunuAssistance is an integrated solution leveraging Digital ID and AI to enhance emergency services efficiency. Features include MOSIP-based unique Digital ID for users, emergency alert system with automatic geolocation sharing, AI assistant providing tailored first-aid instructions, real-time tracking of assistance progress, and emergency services dashboard with prioritized alerts",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 81,
     "Modified": "2025-12-11T09:29:01Z",
     "Created": "2025-12-11T09:29:01Z",
@@ -573,6 +588,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -596,7 +612,7 @@
     "FundedBy": "ID authority",
     "Remarks": "Secure MoMo leverages MOSIP to introduce biometric verification into SIM card purchase and mobile money registration processes. Features include biometric capture at point of SIM purchase, real-time authentication during registration, fraud monitoring with alert systems, and cross-verification of biometrics and demographic data",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 80,
     "Modified": "2025-12-11T09:29:00Z",
     "Created": "2025-12-11T09:29:00Z",
@@ -609,6 +625,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -632,7 +649,7 @@
     "FundedBy": null,
     "Remarks": "Features include biometric registration, integrated farmer registry, easy resource access, market connections, blockchain for tamper-proof records, AI tools for personalized advice, IoT sensors for monitoring, and Smart Village Hubs with digital kiosks.",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 79,
     "Modified": "2025-12-11T09:28:56Z",
     "Created": "2025-12-11T09:28:56Z",
@@ -645,6 +662,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -668,7 +686,7 @@
     "FundedBy": null,
     "Remarks": "Digital platform for property verification and transfer. Digital IDs for property ownership verification, blockchain for immutable record storage, smart contracts for automated processes, AI for fraud detection",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 78,
     "Modified": "2025-12-11T09:28:55Z",
     "Created": "2025-12-11T09:28:55Z",
@@ -681,6 +699,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -704,7 +723,7 @@
     "FundedBy": "Government MDAs",
     "Remarks": "Integrates with existing Edahabia system to eliminate physical cards and PIN dependency",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 77,
     "Modified": "2025-12-11T09:28:53Z",
     "Created": "2025-12-11T09:28:53Z",
@@ -717,6 +736,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -740,7 +760,7 @@
     "FundedBy": null,
     "Remarks": null,
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 76,
     "Modified": "2025-12-16T04:30:50Z",
     "Created": "2025-12-11T09:28:52Z",
@@ -753,6 +773,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -776,7 +797,7 @@
     "FundedBy": "Government MDAs",
     "Remarks": "A digital platform that uses single sign-on for farmer identity verification and machine learning for data-driven, targeted subsidy allocation—ensuring secure audits and reducing fraud, elite capture, and misallocation.  Fraud Elimination in Subsidy Programs using single sign on",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 75,
     "Modified": "2025-12-11T09:28:50Z",
     "Created": "2025-12-11T09:28:50Z",
@@ -789,6 +810,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -812,7 +834,7 @@
     "FundedBy": null,
     "Remarks": "By integrating biometric identity verification, the system provides stakeholders with real-time, reliable data for planning, incentive distribution, financial services, and supply chain transparency",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 74,
     "Modified": "2025-12-11T09:28:48Z",
     "Created": "2025-12-11T09:28:48Z",
@@ -825,6 +847,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -848,7 +871,7 @@
     "FundedBy": "ID authority, Government MDAs",
     "Remarks": "African smallholder farmers struggle to access markets beyond their communities. Rwanda faces a 33% post-harvest loss, which extends to 37% across Africa, due to a lack of secure identity, limiting access to financial and formal services. Farm2Global is a digital marketplace that utilizes trusted digital identity systems to connect smallholder farmers with global clients through export agencies. \nFarm2Global registers and authenticates farmers using a Unique Identification Number (UIN) linked to national digital ID credentials or MOSIP-based digital ID modules. It issues each farmer a Verifiable Credential (VC)– backed digital ID, enabling trusted cross-border transactions and product traceability. Once a farmer’s profile is created, they can submit evidence of their crop varieties and production capacities for specific periods. This evidence can include images, videos, and a site visit conducted by one of our representatives to review and approve the quality of their products.",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 73,
     "Modified": "2025-12-15T09:09:52Z",
     "Created": "2025-12-11T09:28:47Z",
@@ -861,6 +884,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -884,7 +908,7 @@
     "FundedBy": "Government MDAs",
     "Remarks": "A pilot in Zagora Province demonstrated tangible results: 50 hectares of unregistered land were formalized, 15 solar pumps reduced diesel consumption by 12,000 liters annually, and a solar microgrid brought electricity to a school and clinic serving 500 villagers.",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 72,
     "Modified": "2025-12-11T09:28:45Z",
     "Created": "2025-12-11T09:28:45Z",
@@ -897,6 +921,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -920,7 +945,7 @@
     "FundedBy": "Government MDAs, Private Organisations",
     "Remarks": "Healthcare providers can access a patient's complete medical history with a simple scan of their national ID or birth certificate",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 71,
     "Modified": "2025-12-11T09:28:44Z",
     "Created": "2025-12-11T09:28:44Z",
@@ -933,6 +958,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -956,7 +982,7 @@
     "FundedBy": null,
     "Remarks": "Automates face authentication to reduce human error with 99.55% accuracy. Designed specifically for the African context, unlike existing solutions",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 70,
     "Modified": "2025-12-11T09:28:41Z",
     "Created": "2025-12-11T09:28:41Z",
@@ -969,6 +995,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -992,7 +1019,7 @@
     "FundedBy": "Private Organisations",
     "Remarks": "Biosensors, Uses microfluidic and spectroscopic sensor technology, AI-driven skin analysis",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 69,
     "Modified": "2025-12-11T09:28:39Z",
     "Created": "2025-12-11T09:28:39Z",
@@ -1005,6 +1032,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -1028,7 +1056,7 @@
     "FundedBy": null,
     "Remarks": "NOURID+ creates a unified Digital Energy ID by merging official data, allowing for real-time monitoring and smart subsidy access. In partnership with SRM (Société Régionale Multiservices), it advances\nMorocco’s shift from private utilities to inclusive, public-first energy infrastructure",
     "Thumbnail": null,
-    "CoverImage": null,
+    "Cover_x0020_Image": null,
     "ID": 68,
     "Modified": "2025-12-11T09:28:38Z",
     "Created": "2025-12-11T09:28:38Z",
@@ -1041,6 +1069,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
+    "CoverImage": null,
     "Images": []
   },
   {
@@ -1063,20 +1092,23 @@
     "AssuranceLevels": "Identity Assurance Level 2, Authentication Assurance Level 1",
     "FundedBy": null,
     "Remarks": "Manual tracking and outdated contacts cause missed student loan repayments. BoSDID detects graduate employment by linking digital ID and tax number to trigger repayment workflows, sustaining and recycling Botswana's student fund.",
-    "Thumbnail": null,
-    "CoverImage": null,
+    "Thumbnail": "/images/use-cases/67/thumbnail.png",
+    "Cover_x0020_Image": "{\"fileName\":\"Reserved_ImageAttachment_[17]_[Cover_x0020_Image][32]_[dd8f096a81d14eafa7a188359be31635][1]_[9].png\",\"originalImageName\":\"Student loans\"}",
     "ID": 67,
-    "Modified": "2025-12-16T04:30:20Z",
+    "Modified": "2025-12-16T05:24:56Z",
     "Created": "2025-12-11T09:28:36Z",
     "AuthorId": 12,
     "EditorId": 12,
-    "OData__UIVersionString": "7.0",
+    "OData__UIVersionString": "11.0",
     "Attachments": true,
     "GUID": "3852b01f-1bd0-4115-8bf7-f1aa8ed72264",
     "ThumbnailUrl": null,
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
-    "Images": []
+    "CoverImage": "/images/use-cases/67/cover.png",
+    "Images": [
+      "/images/use-cases/67/cover.png"
+    ]
   }
 ]
