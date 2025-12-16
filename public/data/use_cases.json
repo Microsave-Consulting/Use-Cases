@@ -235,8 +235,8 @@
     "AssuranceLevels": "Authentication Assurance Level 1, Authentication Assurance Level 2, Identity Assurance Level 2",
     "FundedBy": null,
     "Remarks": "West African farmers (70% of the population) face systematic fraud with 40% of agricultural subsidies diverted by intermediaries, land conflicts affecting 60% of rural disputes, 80% financial exclusion, and limited product traceability. AgriID leverages biometric digital identity to address these challenges. Farmers scan fingerprints via mobile kiosks or USSD to directly receive subsidies, eliminating corrupt intermediaries. Biometric-linked blockchain land titles reduce disputes. Biometric credit scores based on harvest traceability enable microloans for unbanked farmers. Each harvest receives a digital \"product passport\" linked to farmer ID, enabling market access via QR codes. USSD and offline synchronization support remote farmers. This multi-use biometric approach integrates subsidy security, land rights formalization, financial inclusion, and supply chain transparency in one comprehensive system.",
-    "Thumbnail": "/images/use-cases/90/thumbnail.png",
-    "CoverImage": "/images/use-cases/90/cover.png",
+    "Thumbnail": null,
+    "CoverImage": null,
     "ID": 90,
     "Modified": "2025-12-15T09:07:58Z",
     "Created": "2025-12-11T09:29:17Z",
@@ -249,9 +249,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
-    "Images": [
-      "/images/use-cases/90/cover.png"
-    ]
+    "Images": []
   },
   {
     "FileSystemObjectType": 0,
@@ -741,8 +739,8 @@
     "AssuranceLevels": "Authentication Assurance Level 2",
     "FundedBy": null,
     "Remarks": null,
-    "Thumbnail": "/images/use-cases/76/thumbnail.png",
-    "CoverImage": "/images/use-cases/76/cover.png",
+    "Thumbnail": null,
+    "CoverImage": null,
     "ID": 76,
     "Modified": "2025-12-16T04:30:50Z",
     "Created": "2025-12-11T09:28:52Z",
@@ -755,9 +753,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
-    "Images": [
-      "/images/use-cases/76/cover.png"
-    ]
+    "Images": []
   },
   {
     "FileSystemObjectType": 0,
@@ -851,8 +847,8 @@
     "AssuranceLevels": "Authentication Assurance Level 1, Identity Assurance Level 2",
     "FundedBy": "ID authority, Government MDAs",
     "Remarks": "African smallholder farmers struggle to access markets beyond their communities. Rwanda faces a 33% post-harvest loss, which extends to 37% across Africa, due to a lack of secure identity, limiting access to financial and formal services. Farm2Global is a digital marketplace that utilizes trusted digital identity systems to connect smallholder farmers with global clients through export agencies. \nFarm2Global registers and authenticates farmers using a Unique Identification Number (UIN) linked to national digital ID credentials or MOSIP-based digital ID modules. It issues each farmer a Verifiable Credential (VC)– backed digital ID, enabling trusted cross-border transactions and product traceability. Once a farmer’s profile is created, they can submit evidence of their crop varieties and production capacities for specific periods. This evidence can include images, videos, and a site visit conducted by one of our representatives to review and approve the quality of their products.",
-    "Thumbnail": "/images/use-cases/73/thumbnail.png",
-    "CoverImage": "/images/use-cases/73/cover.png",
+    "Thumbnail": null,
+    "CoverImage": null,
     "ID": 73,
     "Modified": "2025-12-15T09:09:52Z",
     "Created": "2025-12-11T09:28:47Z",
@@ -865,9 +861,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
-    "Images": [
-      "/images/use-cases/73/cover.png"
-    ]
+    "Images": []
   },
   {
     "FileSystemObjectType": 0,
@@ -1069,8 +1063,8 @@
     "AssuranceLevels": "Identity Assurance Level 2, Authentication Assurance Level 1",
     "FundedBy": null,
     "Remarks": "Manual tracking and outdated contacts cause missed student loan repayments. BoSDID detects graduate employment by linking digital ID and tax number to trigger repayment workflows, sustaining and recycling Botswana's student fund.",
-    "Thumbnail": "/images/use-cases/67/thumbnail.png",
-    "CoverImage": "/images/use-cases/67/cover.png",
+    "Thumbnail": null,
+    "CoverImage": null,
     "ID": 67,
     "Modified": "2025-12-16T04:30:20Z",
     "Created": "2025-12-11T09:28:36Z",
@@ -1083,8 +1077,6 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
-    "Images": [
-      "/images/use-cases/67/cover.png"
-    ]
+    "Images": []
   }
 ]
