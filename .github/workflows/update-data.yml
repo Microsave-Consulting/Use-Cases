@@ -41,9 +41,26 @@ jobs:
         env:
           AZURE_FUNC_URL_HT: ${{ secrets.AZURE_FUNC_URL_HT }}
 
-      - name: Promote HT raw JSON to final hackathons.json
+      - name: Normalize HT list to hackathons.json
         run: |
-          cp public/data/hackathons.raw.json public/data/hackathons.json
+          node -e "
+            const fs = require('fs');
+            const raw = JSON.parse(fs.readFileSync('public/data/hackathons.raw.json','utf8'));
+
+            const out = (Array.isArray(raw) ? raw : []).map((h, i) => ({
+              id: h.id || h.Id || h.ID || String(i),
+              name: h.Title || h.title || '',
+              track: h.Track || h.track || '',
+              timeline: h.Timeline || h.timeline || '',
+              location: h.Location || h.location || '',
+              status: (h.Status || h.status || '').toUpperCase()
+            }));
+
+            fs.writeFileSync(
+              'public/data/hackathons.json',
+              JSON.stringify(out, null, 2)
+            );
+          "
           rm -f public/data/hackathons.raw.json
 
       - name: Export thumbnails + cover images and build final JSON
@@ -62,7 +79,7 @@ jobs:
 
           rm -f public/data/use_cases.raw.json
 
-          # JSON + both image types + hackathons list JSON
+          # JSON + both image types + hackathons JSON
           git add public/data/use_cases.json public/data/hackathons.json public/images/use-cases
 
           if git diff --cached --quiet; then
