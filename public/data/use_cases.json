@@ -1226,9 +1226,7 @@
     "ThumbnailServerRelativeUrl": null,
     "CoverImageUrl": null,
     "CoverImageServerRelativeUrl": null,
-    "CoverImage": "/images/use-cases/67/cover.png",
-    "Images": [
-      "/images/use-cases/67/cover.png"
-    ]
+    "CoverImage": null,
+    "Images": []
   }
 ]
