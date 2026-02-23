@@ -1208,7 +1208,7 @@
     "AssuranceLevels": "Identity Assurance Level 2, Authentication Assurance Level 1",
     "FundedBy": null,
     "Remarks": "Manual tracking and outdated contacts cause missed student loan repayments. BoSDID detects graduate employment by linking digital ID and tax number to trigger repayment workflows, sustaining and recycling Botswana's student fund.",
-    "Thumbnail": "/images/use-cases/67/thumbnail.png",
+    "Thumbnail": null,
     "Cover_x0020_Image": "{\"fileName\":\"Reserved_ImageAttachment_[17]_[Cover_x0020_Image][32]_[dd8f096a81d14eafa7a188359be31635][1]_[9].png\",\"originalImageName\":\"Student loans\"}",
     "IdentityAssuranceLevel": null,
     "AuthenticationAssuranceLevel": null,
